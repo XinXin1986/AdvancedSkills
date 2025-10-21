@@ -269,6 +269,15 @@ object ConfigScreenHandler {
                     .setSaveConsumer { config.developmentMode = it }
                     .build()
             )
+
+            addEntry(
+                entryBuilder.startBooleanToggle(
+                    translate("screen.config.quickCloseWheelMode"),
+                    config.quickCloseWheelMode
+                ).setDefaultValue(false)
+                    .setSaveConsumer { config.quickCloseWheelMode = it }
+                    .build()
+            )
         }
     }
 

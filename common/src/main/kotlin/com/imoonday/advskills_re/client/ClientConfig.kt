@@ -40,6 +40,7 @@ class ClientConfig {
     var displayProgressBarBelowCrosshair: Boolean = true
     var progressBarOffsetY: Int = 0
     var developmentMode: Boolean = false
+    var quickCloseWheelMode: Boolean = false
     var useRingCastingWheel: Boolean = true
     var disableLearningNotifications: Boolean = false
     var disableStatusEffectRenderers: Boolean = false

@@ -231,7 +231,7 @@ object SkillSlotRenderer {
         }
 
         if (config.displayQuickCastKey) {
-            val text = "[".toText().append(ModKeyBindings.QUICK_CAST.boundKeyLocalizedText).append("]")
+            val text = "[".toText().append(ModKeyBindings.USE_SELECTED_SKILL.boundKeyLocalizedText).append("]")
             val textRenderer = client!!.textRenderer
             val left = x + 11 < context.scaledWindowWidth / 2
             val centerX = if (left) x + 11 else x + 7 + 11

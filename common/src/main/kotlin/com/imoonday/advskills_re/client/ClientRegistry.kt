@@ -107,7 +107,7 @@ object ClientRegistry {
         WorldRenderEvents.AFTER_ENTITIES.register(SkillRendererHandler::renderAfterEntities)
         WorldRenderEvents.LAST.register(SkillRendererHandler::renderLast)
         ClientPlayerEvent.CLIENT_PLAYER_JOIN.register {
-            SkillWheelScreen.quickCastSlot = null
+            SkillWheelScreen.quickCastSlot = 1
             Channels.REQUEST_SYNC_COMPONENT_C2S.sendToServer(
                 RequestSyncComponentC2SRequest(
                     it.id,

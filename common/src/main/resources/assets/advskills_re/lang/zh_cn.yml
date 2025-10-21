@@ -5,6 +5,8 @@ advskills_re:
     openGalleryScreen: 查看技能图鉴
     openListScreen: 查看技能列表
     openSlotScreen: 调整技能栏位置
+    useSelectedSkill: 使用选中的技能
+    switchSkillHelpKey: 使用滚轮切换技能的辅助键(按下)
     quickCast: 快捷施法
     useSkill1: 使用技能 1
     useSkill2: 使用技能 2

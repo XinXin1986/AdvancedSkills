@@ -5,6 +5,8 @@ advskills_re:
     openGalleryScreen: View the Skill Atlas
     openListScreen: View the list of skills
     openSlotScreen: Adjust the position of the skill bar
+    useSelectedSkill: Use the selected Skill.
+    switchSkillHelpKey: The skill switcher helper key
     quickCast: Quick Cast
     useSkill1: Use Skill 1
     useSkill2: Use Skill 2
@@ -16,8 +18,6 @@ advskills_re:
     useSkill8: Use Skill 8
     useSkill9: Use Skill 9
     useSkill10: Use Skill 10
-    switchPreviousSkill: Switch to Previous Skill
-    switchNextSkill: Switch to Next Skill
   useSkill:
     cooling: '%s is cooling: %s'
     failed: Use %s failed

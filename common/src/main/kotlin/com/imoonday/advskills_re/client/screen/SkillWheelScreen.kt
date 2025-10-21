@@ -1,15 +1,21 @@
 package com.imoonday.advskills_re.client.screen
 
 import com.imoonday.advskills_re.client.*
-import com.imoonday.advskills_re.client.render.*
-import com.imoonday.advskills_re.client.render.skill.*
-import com.imoonday.advskills_re.network.c2s.*
-import com.imoonday.advskills_re.util.*
-import net.minecraft.client.gui.*
-import net.minecraft.client.gui.screen.*
-import net.minecraft.client.render.*
-import net.minecraft.text.*
-import org.joml.*
+import com.imoonday.advskills_re.client.render.drawTextWithBackground
+import com.imoonday.advskills_re.client.render.skill.SkillRenderer
+import com.imoonday.advskills_re.client.render.skill.SkillSlotRenderer
+import com.imoonday.advskills_re.network.c2s.UseSkillC2SRequest
+import com.imoonday.advskills_re.util.getSkill
+import com.imoonday.advskills_re.util.isCharging
+import com.imoonday.advskills_re.util.skillContainer
+import com.imoonday.advskills_re.util.translate
+import net.minecraft.client.gui.DrawContext
+import net.minecraft.client.gui.screen.Screen
+import net.minecraft.client.render.RenderLayer
+import net.minecraft.client.render.VertexConsumer
+import net.minecraft.text.Style
+import net.minecraft.text.Text
+import org.joml.Vector2i
 import kotlin.math.*
 
 class SkillWheelScreen : Screen(Text.empty()) {
@@ -120,7 +126,9 @@ class SkillWheelScreen : Screen(Text.empty()) {
     override fun tick() {
         super.tick()
         handleMovement()
-        if (!ModKeyBindings.QUICK_CAST.isPressedInScreen) close()
+        if (ClientConfig.get().quickCloseWheelMode && !ModKeyBindings.OPEN_SKILL_WHEEL.isPressedInScreen) {
+            close()
+        }
     }
 
     override fun close() {
