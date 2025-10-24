@@ -5,8 +5,11 @@ import com.imoonday.advskills_re.client.screen.SkillWheelScreen.Companion.quickC
 import com.imoonday.advskills_re.component.SkillContainer
 import com.imoonday.advskills_re.init.Skills
 import com.imoonday.advskills_re.network.c2s.UseSkillC2SRequest
+import com.imoonday.advskills_re.skill.PassiveSkill
 import com.imoonday.advskills_re.util.choiceData
+import com.imoonday.advskills_re.util.getSkill
 import com.imoonday.advskills_re.util.skillContainer
+import com.mojang.logging.LogUtils
 import dev.architectury.event.EventResult
 import dev.architectury.event.events.client.ClientRawInputEvent
 import dev.architectury.event.events.client.ClientTickEvent
@@ -20,7 +23,7 @@ import org.lwjgl.glfw.GLFW
 
 @Environment(EnvType.CLIENT)
 object ModKeyBindings {
-
+    private val LOGGER = LogUtils.getLogger()
     val skillKeys = mutableListOf<KeyBinding>()
     private var isUsingQuickCast = false
 
@@ -282,45 +285,57 @@ object ModKeyBindings {
 
     private fun findPrevSkillSlot(player: ClientPlayerEntity, curSlot: Int?): Int {
         val slotSize = player.skillContainer.slotSize
-        var slot = curSlot?.minus(1) ?: slotSize
-        if (slot < 1) {
-            slot = slotSize
+        LOGGER.info("findPrevSkillSlot. curSlot {}", curSlot)
+        val curSlot = if (curSlot == null || curSlot < 1 || curSlot > slotSize) {
+            slotSize
+        } else {
+            curSlot
         }
-        return slot
-//        do {
-//            var nextSlot = curSlot.minus(1)
-//            if (nextSlot < 1) {
-//                nextSlot = slotSize
-//            }
-//            if (SkillSlot.isValidIndex(player, nextSlot)) {
-//                val skill = player.getSkill(nextSlot)
-//                if (skill !is PassiveSkill) {
-//                    return nextSlot
-//                }
-//            }
-//        } while (nextSlot != curSlot)
-//        return curSlot
+        var nextSlot = curSlot
+        do {
+            nextSlot = nextSlot.minus(1)
+            if (nextSlot < 1) {
+                nextSlot = slotSize
+            }
+            LOGGER.info("findPrevSkillSlot. nextSlot {}", nextSlot)
+            val skill = player.getSkill(nextSlot);
+            LOGGER.info(
+                "findPrevSkillSlot. nextSlot ${nextSlot}, " +
+                        "skill: name ${skill.name}, isEmpty: ${skill.isEmpty}, is not PassiveSkill: ${skill !is PassiveSkill}"
+            )
+            if (!skill.isEmpty) {
+                break
+            }
+        } while (nextSlot != curSlot)
+        LOGGER.info("findPrevSkillSlot result $nextSlot")
+        return nextSlot
     }
 
     private fun findNextSkillSlot(player: ClientPlayerEntity, curSlot: Int?): Int {
         val slotSize = player.skillContainer.slotSize
-        var slot = curSlot?.plus(1) ?: 1
-        if (slot > slotSize) {
-            slot = 1
+        LOGGER.info("findNextSkillSlot. curSlot {}", curSlot)
+        val curSlot = if (curSlot == null || curSlot < 1 || curSlot > slotSize) {
+            1
+        } else {
+            curSlot
         }
-        return slot
-//        do {
-//            var nextSlot = curSlot.plus(1)
-//            if (nextSlot > slotSize) {
-//                nextSlot = 1
-//            }
-//            if (SkillSlot.isValidIndex(player, nextSlot)) {
-//                val skill = player.getSkill(nextSlot)
-//                if (skill !is PassiveSkill) {
-//                    return nextSlot
-//                }
-//            }
-//        } while (nextSlot != curSlot)
-//        return curSlot
+        var nextSlot = curSlot
+        do {
+            nextSlot = nextSlot.plus(1)
+            if (nextSlot > slotSize) {
+                nextSlot = 1
+            }
+            LOGGER.info("findNextSkillSlot. nextSlot {}", nextSlot)
+            val skill = player.getSkill(nextSlot);
+            LOGGER.info(
+                "findNextSkillSlot. nextSlot ${nextSlot}, " +
+                        "skill: name ${skill.name}, isEmpty: ${skill.isEmpty}, is not PassiveSkill: ${skill !is PassiveSkill}"
+            )
+            if (!skill.isEmpty) {
+                break
+            }
+        } while (nextSlot != curSlot)
+        LOGGER.info("findNextSkillSlot result $nextSlot")
+        return nextSlot
     }
 }
