@@ -28,13 +28,13 @@ class ClientConfig {
     var quickCastWheelHoldTime: Int = 250
     var hideSkillCrosshair: Boolean = false
     var hideSkillInfo: Boolean = false
-    var hideSkillSlots: HideMode = HideMode.DYNAMICALLY_HIDE
+    var hideSkillSlots: HideMode = HideMode.SHOW
     var dynamicallyHideDirection: AnimationDirection = AnimationDirection.RIGHT
     var progressBarColor: Int = 0xFFFFEE58.toInt()
-    var displaySelectedSkillSlot: Boolean = true
-    var displayQuickCastKey: Boolean = true
+    var displaySelectedSkillSlot: Boolean = false
+    var displayQuickCastKey: Boolean = false
     var useVanillaSlot: Boolean = false
-    var selectedSlotPosition: SlotPosition = SlotPosition.LEFT_OF_HOTBAR
+    var selectedSlotPosition: SlotPosition = SlotPosition.RIGHT_OF_HOTBAR
     var selectedSlotOffsetX: Int = 0
     var selectedSlotOffsetY: Int = 0
     var displayProgressBarBelowCrosshair: Boolean = true

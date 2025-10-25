@@ -361,7 +361,7 @@ object ConfigScreenHandler {
                     translate("screen.config.hideSkillSlots"),
                     HideMode::class.java,
                     config.hideSkillSlots
-                ).setDefaultValue(HideMode.DYNAMICALLY_HIDE)
+                ).setDefaultValue(HideMode.SHOW)
                     .setEnumNameProvider { (it as HideMode).displayName }
                     .setSaveConsumer { config.hideSkillSlots = it }
                     .build()
@@ -410,7 +410,7 @@ object ConfigScreenHandler {
                 entryBuilder.startBooleanToggle(
                     translate("screen.config.displaySelectedSkillSlot"),
                     config.displaySelectedSkillSlot
-                ).setDefaultValue(true)
+                ).setDefaultValue(false)
                     .setSaveConsumer { config.displaySelectedSkillSlot = it }
                     .build()
             )
@@ -419,7 +419,7 @@ object ConfigScreenHandler {
                 entryBuilder.startBooleanToggle(
                     translate("screen.config.displayQuickCastKey"),
                     config.displayQuickCastKey
-                ).setDefaultValue(true)
+                ).setDefaultValue(false)
                     .setSaveConsumer { config.displayQuickCastKey = it }
                     .build()
             )
